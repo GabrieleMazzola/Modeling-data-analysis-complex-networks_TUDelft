@@ -11,7 +11,7 @@ with open('network.json') as f:
 print(f"Loading network with {len(edges_list)} timesteps")
 
 with open('ranking.json') as f:
-    ranking = json.load(f)
+    influence = json.load(f)
 
 # Build aggregated network
 flat_list = [item for sublist in edges_list for item in sublist]
@@ -33,5 +33,42 @@ clust_coef =list(nx.clustering(G).items())
 clust_coef = sorted(clust_coef, key=lambda x: x[1], reverse=True)
 #print(clust_coef)
 
-print(len(ranking), len(degrees), len(clust_coef))
+print(len(influence), len(degrees), len(clust_coef))
 
+
+def compute_Rrd(f):
+    Rf = [node for node, _ in influence[0:int(f*len(influence))]]
+    Df = [node for node, _ in degrees[0:int(f*len(degrees))]]
+
+    intersect = []
+    for node in Rf:
+        if node in Df:
+            intersect.append(node)
+
+    return len(intersect)/len((Rf))
+
+
+def compute_Rrc(f):
+    Rf = [node for node, _ in influence[0:int(f * len(influence))]]
+    Cf = [node for node, _ in clust_coef[0:int(f * len(clust_coef))]]
+
+    intersect = []
+    for node in Rf:
+        if node in Cf:
+            intersect.append(node)
+
+    return len(intersect) / len((Rf))
+
+
+RRCs = []
+RRds = []
+f_values = np.linspace(0.05, 0.5, 10)
+for f in f_values:
+    RRCs.append(compute_Rrc(f))
+    RRds.append(compute_Rrd(f))
+
+plt.plot(f_values, RRCs)
+plt.show()
+
+plt.plot(f_values, RRds)
+plt.show()
