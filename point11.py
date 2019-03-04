@@ -67,8 +67,13 @@ for f in f_values:
     RRCs.append(compute_Rrc(f))
     RRds.append(compute_Rrd(f))
 
+plt.subplot(1, 2, 1)
 plt.plot(f_values, RRCs)
+plt.ylabel("rRC")
+plt.xlabel("f")
+plt.subplot(1, 2, 2)
+plt.plot(f_values, RRds)
+plt.ylabel("rRD")
+plt.xlabel("f")
 plt.show()
 
-plt.plot(f_values, RRds)
-plt.show()
