@@ -61,3 +61,23 @@ def obtain_cumulative_infection(seed_node, dataset):
 
         cumulative_function.append(infected_nodes.copy())
     return cumulative_function
+
+
+def cumulative_infection_network(unique_nodes, graph_dataset):
+    cumulative_functions = []
+    seed_nodes = []
+    for seed_node in unique_nodes:
+        print(seed_node)
+        cumulative = obtain_cumulative_infection(seed_node, graph_dataset)
+        cumulative_functions.append(cumulative)
+        seed_nodes.append(seed_node)
+
+    aggregated = list(zip(*cumulative_functions))
+
+    avg_values = []
+    std_values = []
+    for infections in aggregated:
+        infected = [len(infected) for infected in infections]
+        avg_values.append(np.average(infected))
+        std_values.append(np.std(infected))
+    return avg_values, std_values
