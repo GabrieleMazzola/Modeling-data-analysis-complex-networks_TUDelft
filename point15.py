@@ -15,6 +15,7 @@ G3, G3_unique_nodes = build_graph_from_dataset(G3_dataset)
 print(len(G_dataset), len(G2_dataset), len(G3_dataset))
 
 COMPUTE = False
+PLOT = False
 
 if COMPUTE:
     simulations = {}
@@ -24,23 +25,24 @@ if COMPUTE:
 
     with open('./data/point15simulations.p', 'wb') as fp:
         pickle.dump(simulations, fp, protocol=pickle.HIGHEST_PROTOCOL)
-
-
-with open("./data/point15simulations.p", 'rb') as fin:
-    simulations = pickle.load(fin)
+else:
+    with open("./data/point15simulations.p", 'rb') as fin:
+        simulations = pickle.load(fin)
 
 values = [simulations['G'], simulations['G2'], simulations['G3']]
 
-for index, (avg, std) in enumerate(values):
-    plt.errorbar(np.array(list(range(len(avg)))),
-             np.array(avg),
-             np.array(std),
-             ecolor="red",
-             )
-    plt.xlabel("Timestep")
-    plt.ylabel("# Infected nodes")
-    plt.title("G" + str(index))
-    plt.show()
+if PLOT:
+    for index, (avg, std) in enumerate(values):
+        plt.errorbar(np.array(list(range(len(avg)))),
+                 np.array(avg),
+                 np.array(std),
+                 ecolor="red")
+        plt.xlabel("Timestep")
+        plt.ylabel("# Infected nodes")
+        plt.title("G" + str(index))
+        plt.show()
+
+
 
 
 
