@@ -44,6 +44,20 @@ def compute_ranking(target_ranking, est_ranking):
     return f_values, result
 
 
+def obtain_cumulative_infection(seed_node, dataset):
+    infected_nodes = [seed_node]
+    cumulative_function = []
+    for index, interactions in enumerate(dataset):
+        newly_infected = []
 
+        for interaction in interactions:
+            if interaction[0] in infected_nodes:
+                newly_infected.append(interaction[1])
+            if interaction[1] in infected_nodes:
+                newly_infected.append(interaction[0])
 
+        infected_nodes += list(set(newly_infected))
+        infected_nodes = list(set(infected_nodes))
 
+        cumulative_function.append(infected_nodes.copy())
+    return cumulative_function

@@ -1,5 +1,5 @@
 from random import shuffle
-
+import random
 import pandas as pd
 
 from complex_net_assignment.util import load_network, build_graph_from_dataset
@@ -26,8 +26,33 @@ def createG2_csv():
     return df
 
 
-# new_shuffled_dataframe = createG2_csv()
-# new_shuffled_dataframe.to_csv("./data/g2.csv", index=False)
+def createG3_csv():
+    g_data = load_network('./data/network.json')
+    g_graph, g_unique_nodes = build_graph_from_dataset(g_data)
 
-graph_dataset = load_network('./data/g2.json')
-graph, unique_nodes = build_graph_from_dataset(graph_dataset)
+    g_edges = list(g_graph.edges)
+
+    new_connections = []
+    timestamps = pd.read_excel("..\manufacturing_emails_temporal_network.xlsx")['timestamp'].tolist()
+    for timestamp in timestamps:
+        selected_edge = random.choice(g_edges)
+        new_connections.append([selected_edge[0], selected_edge[1], timestamp])
+
+    df = pd.DataFrame(new_connections)
+    df.columns = ['node1', 'node2', 'timestamp']
+    return df
+
+
+
+
+
+# g2 = createG2_csv()
+# g2.to_csv("./data/g2.csv", index=False)
+# g2_data = load_network('./data/g2.json')
+# g2_graph, g2_unique_nodes = build_graph_from_dataset(graph_dataset)
+
+
+#g3 = createG3_csv()
+#g3.to_csv("./data/g3.csv", index=False)
+# g3_data = load_network('./data/g3.json')
+# g3_graph, g3_unique_nodes = build_graph_from_dataset(graph_dataset)
