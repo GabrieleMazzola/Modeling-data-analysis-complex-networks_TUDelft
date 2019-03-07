@@ -3,7 +3,7 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 
-with open('network.json') as f:
+with open('./data/network.json') as f:
     edges_list = json.load(f)
 
 print(f"Loading network with {len(edges_list)} timesteps")
@@ -61,10 +61,12 @@ unique_shortest_paths = list(set(unique_shortest_paths))
 avg_hopcount_s_paths = np.average([l[2] for l in unique_shortest_paths])
 print(f"Average hopcount shortest paths: {avg_hopcount_s_paths}")
 
+#print(f"Average hopcount shortest paths NETWORKX: {nx.average_shortest_path_length(G)}")
+
 print(f"Diameter: {sorted(unique_shortest_paths, key=lambda x: x[2], reverse=True)[0]}")
 
 # Point 6
-nx.random_regular_graph()
+#nx.random_regular_graph()
 
 # Point 7
 A_sp = nx.adjacency_spectrum(G)
