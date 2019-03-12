@@ -40,8 +40,12 @@ print(timesteps)
 
 f_values, RTs = compute_ranking(infect_ranking, timesteps)
 
+plt.subplot(1, 2, 1)
 plt.plot(f_values, RTs)
-plt.ylabel("Temporal Feature")
+plt.ylabel("rRT (Temporal Feature)")
+plt.xlabel("f")
+plt.subplot(1, 2, 2)
+plt.plot(f_values, RRbs)
+plt.ylabel("rRB (Betweennes")
 plt.xlabel("f")
 plt.show()
-

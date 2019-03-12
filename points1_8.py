@@ -35,7 +35,9 @@ print(f"Degree variance: {np.var(degrees)}")
 
 
 # Point 2)
-plt.hist(degrees, bins=30)
+plt.hist(degrees, bins=20)
+plt.xlabel("Degree (k)")
+plt.ylabel("# of nodes with degree = k")
 plt.show()
 
 # Point 3)
@@ -65,9 +67,6 @@ print(f"Average hopcount shortest paths: {avg_hopcount_s_paths}")
 
 print(f"Diameter: {sorted(unique_shortest_paths, key=lambda x: x[2], reverse=True)[0]}")
 
-# Point 6
-#nx.random_regular_graph()
-
 # Point 7
 A_sp = nx.adjacency_spectrum(G)
 print(f"Spectral radius: {float(np.max(A_sp))}")
@@ -76,4 +75,3 @@ print(f"Spectral radius: {float(np.max(A_sp))}")
 print(f"Algebraic connectivity: {nx.algebraic_connectivity(G)}")
 
 
-print()
