@@ -1,5 +1,7 @@
+import codecs
+import json
+
 import pandas as pd
-import json, codecs
 
 filename_from = "./data/g3.csv"
 filename_to = "./data/g3.json"

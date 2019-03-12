@@ -1,26 +1,26 @@
-import codecs
-
-from util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
-import networkx as nx
-import numpy as np
-import matplotlib.pyplot as plt
 import json
 
+import matplotlib.pyplot as plt
+import networkx as nx
+
+from util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
 
 graph_dataset = load_network('./data/network.json')
 infect_ranking = load_infection_ranking("./data/ranking.json")
 
 graph, unique_nodes = build_graph_from_dataset(graph_dataset)
 
-#Degree
+# Degree
 degrees = graph.degree
 degrees = sorted(degrees, key=lambda x: x[1], reverse=True)
-#print(degrees)
+# print(degrees)
 
-#Clustering coefficient
-clust_coef =list(nx.clustering(graph).items())
+# Clustering coefficient
+clust_coef = list(nx.clustering(graph).items())
 clust_coef = sorted(clust_coef, key=lambda x: x[1], reverse=True)
-#print(clust_coef)
+
+
+# print(clust_coef)
 
 def obtain_cumulative_infection(seed_node, dataset):
     infected_nodes = [seed_node]
@@ -40,7 +40,6 @@ def obtain_cumulative_infection(seed_node, dataset):
 
         cumulative_function.append(infected_nodes.copy())
     return cumulative_function
-
 
 
 #
@@ -92,13 +91,9 @@ f_values, RDs = compute_ranking(average_infection_timesteps, degrees)
 f_values, RCs = compute_ranking(average_infection_timesteps, clust_coef)
 f_values, Rr_prime = compute_ranking(average_infection_timesteps, ranking_initial)
 
-
 plt.plot(f_values, RDs, label="rDs")
 plt.plot(f_values, RCs, label="rCs")
 plt.plot(f_values, Rr_prime, label="rRs")
 plt.xlabel("f")
 plt.legend(loc="upper left")
 plt.show()
-
-
-

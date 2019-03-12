@@ -1,25 +1,22 @@
 import json
+
+import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
-import matplotlib.pyplot as plt
 
 with open('./data/network.json') as f:
     edges_list = json.load(f)
 
 print(f"Loading network with {len(edges_list)} timesteps")
 
-
 # Build aggregated network
 flat_list = [item for sublist in edges_list for item in sublist]
-tmp = list(map(list,zip(*flat_list)))
+tmp = list(map(list, zip(*flat_list)))
 unique_nodes = set(tmp[0] + tmp[1])
-
 
 G = nx.Graph()
 G.add_nodes_from(list(unique_nodes))
 G.add_edges_from([tuple(item) for sublist in edges_list for item in sublist])
-
-
 
 # Point 1)
 print(f"Number of nodes: {G.number_of_nodes()}")
@@ -30,9 +27,6 @@ degrees = sorted([d for n, d in G.degree], reverse=True)  # degree sequence
 
 print(f"Average Degree: { np.average(degrees)}")
 print(f"Degree variance: {np.var(degrees)}")
-
-
-
 
 # Point 2)
 plt.hist(degrees, bins=20)
@@ -63,7 +57,7 @@ unique_shortest_paths = list(set(unique_shortest_paths))
 avg_hopcount_s_paths = np.average([l[2] for l in unique_shortest_paths])
 print(f"Average hopcount shortest paths: {avg_hopcount_s_paths}")
 
-#print(f"Average hopcount shortest paths NETWORKX: {nx.average_shortest_path_length(G)}")
+# print(f"Average hopcount shortest paths NETWORKX: {nx.average_shortest_path_length(G)}")
 
 print(f"Diameter: {sorted(unique_shortest_paths, key=lambda x: x[2], reverse=True)[0]}")
 
@@ -73,5 +67,3 @@ print(f"Spectral radius: {float(np.max(A_sp))}")
 
 # Point 8
 print(f"Algebraic connectivity: {nx.algebraic_connectivity(G)}")
-
-

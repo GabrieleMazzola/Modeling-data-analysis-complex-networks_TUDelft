@@ -1,5 +1,6 @@
-from random import shuffle
 import random
+from random import shuffle
+
 import pandas as pd
 
 from util import load_network, build_graph_from_dataset
@@ -42,17 +43,13 @@ def createG3_csv():
     df.columns = ['node1', 'node2', 'timestamp']
     return df
 
-
-
-
-
 # g2 = createG2_csv()
 # g2.to_csv("./data/g2.csv", index=False)
 # g2_data = load_network('./data/g2.json')
 # g2_graph, g2_unique_nodes = build_graph_from_dataset(graph_dataset)
 
 
-#g3 = createG3_csv()
-#g3.to_csv("./data/g3.csv", index=False)
+# g3 = createG3_csv()
+# g3.to_csv("./data/g3.csv", index=False)
 # g3_data = load_network('./data/g3.json')
 # g3_graph, g3_unique_nodes = build_graph_from_dataset(graph_dataset)
