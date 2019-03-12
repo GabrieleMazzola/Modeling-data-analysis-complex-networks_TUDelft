@@ -1,6 +1,6 @@
 import codecs
 
-from complex_net_assignment.util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
+from util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
@@ -85,19 +85,19 @@ def obtain_cumulative_infection(seed_node, dataset):
 with open("./data/timestep_rankings.json") as f:
     average_infection_timesteps = json.load(f)
 
+with open("./data/ranking.json") as f:
+    ranking_initial = json.load(f)
 
 f_values, RDs = compute_ranking(average_infection_timesteps, degrees)
 f_values, RCs = compute_ranking(average_infection_timesteps, clust_coef)
+f_values, Rr_prime = compute_ranking(average_infection_timesteps, ranking_initial)
 
 
-plt.subplot(1, 2, 2)
-plt.plot(f_values, RDs)
-plt.ylabel("rDs")
+plt.plot(f_values, RDs, label="rDs")
+plt.plot(f_values, RCs, label="rCs")
+plt.plot(f_values, Rr_prime, label="rRs")
 plt.xlabel("f")
-plt.subplot(1, 2, 1)
-plt.plot(f_values, RCs)
-plt.ylabel("rCs")
-plt.xlabel("f")
+plt.legend(loc="upper left")
 plt.show()
 
 

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from complex_net_assignment.util import load_network, build_graph_from_dataset, \
+from util import load_network, build_graph_from_dataset, \
     cumulative_infection_network
 
 # Point 9

@@ -5,12 +5,12 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-with open('network.json') as f:
+with open('./data/network.json') as f:
     edges_list = json.load(f)
 
 print(f"Loading network with {len(edges_list)} timesteps")
 
-with open('ranking.json') as f:
+with open('./data/ranking.json') as f:
     influence = json.load(f)
 
 # Build aggregated network
@@ -67,13 +67,10 @@ for f in f_values:
     RRCs.append(compute_Rrc(f))
     RRds.append(compute_Rrd(f))
 
-plt.subplot(1, 2, 1)
-plt.plot(f_values, RRCs)
-plt.ylabel("rRC")
+plt.plot(f_values, RRCs, label="Rrc")
 plt.xlabel("f")
-plt.subplot(1, 2, 2)
-plt.plot(f_values, RRds)
-plt.ylabel("rRD")
+plt.plot(f_values, RRds, label="Rrd")
 plt.xlabel("f")
+plt.legend(loc="top left")
 plt.show()
 

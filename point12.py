@@ -1,4 +1,4 @@
-from complex_net_assignment.util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
+from util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt

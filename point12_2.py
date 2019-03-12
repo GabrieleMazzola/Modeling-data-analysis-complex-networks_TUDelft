@@ -1,4 +1,4 @@
-from complex_net_assignment.util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
+from util import load_network, load_infection_ranking, build_graph_from_dataset, compute_ranking
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
@@ -112,20 +112,13 @@ for f in f_values:
 
 
 
-plt.subplot(2, 2, 1)
-plt.plot(f_values, RRCs)
-plt.ylabel("rRC")
+plt.plot(f_values, RRCs, label="rRC")
 plt.xlabel("f")
-plt.subplot(2, 2, 2)
-plt.plot(f_values, RRds)
-plt.ylabel("rRD")
+plt.plot(f_values, RRds, label="rRD")
 plt.xlabel("f")
-plt.subplot(2, 2, 3)
-plt.plot(f_values, RTs)
-plt.ylabel("rRT (Temporal Feature)")
+plt.plot(f_values, RTs, label="rRT (Temporal Feature)")
 plt.xlabel("f")
-plt.subplot(2, 2, 4)
-plt.plot(f_values, RRbs)
-plt.ylabel("rRB (Betweennes")
+plt.plot(f_values, RRbs, label="rRB (Betweennes)")
 plt.xlabel("f")
+plt.legend(loc="upper left")
 plt.show()

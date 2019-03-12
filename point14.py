@@ -2,7 +2,7 @@ from random import shuffle
 import random
 import pandas as pd
 
-from complex_net_assignment.util import load_network, build_graph_from_dataset
+from util import load_network, build_graph_from_dataset
 
 
 def createG2_csv():

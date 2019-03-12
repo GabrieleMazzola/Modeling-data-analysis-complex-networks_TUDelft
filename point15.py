@@ -1,4 +1,4 @@
-from complex_net_assignment.util import load_network, build_graph_from_dataset, cumulative_infection_network
+from util import load_network, build_graph_from_dataset, cumulative_infection_network
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
